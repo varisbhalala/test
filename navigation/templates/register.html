@@ -1,0 +1,28 @@
+
+<form method="POST" action="{% url 'store' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="radio" name="role" value="p" />Publisher
+  <input type="radio" name="role" value="a" />Advertiser<br /><br />
+  <input type="text" name="name" placeholder="name" /><br /><br />
+  <input type="number" name="contact_number" placeholder="contact_number"  /><br /><br />
+  <input type="email" name="email" placeholder="E-mail" /><br /><br />
+  <input type="file" name="image" /><br /><br />
+  <input type="text" name="company_name" placeholder="Company Name" /><br /><br />
+  <input type="text" name="company_address" placeholder="Company Address" /><br /><br />
+  <select name="state">
+    <option name="gujarat" value="gujarat">gujarat</option>
+    <option name="maharashtra" value="maharashtra">maharashtra</option>
+  </select><br /><br />
+  <select name="city">
+    <option name="ahmedabad" value="ahmedabad">ahmedabad</option>
+    <option name="surat" value="surat">surat</option>
+    <option name="mumbai" value="mumbai">mumbai</option>
+    <option name="pune" value="pune">pune</option>
+  </select><br /><br />
+
+  <input type="text" name="username" placeholder="username"/><br /><br />
+  <input type="password" name="password" placeholder="password"/><br /><br />
+
+
+  <input type="submit" value="Register" />
+</form>
