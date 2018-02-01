@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import cities
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_digiboard',
         'USER':'root',
-        'PASSWORD':'root',
+        'PASSWORD':'12345678',
         'HOST':'localhost',
         'PORT':3306
     }
@@ -141,3 +141,4 @@ STATICFILES_DIRS = (
 )
 STATIC_ROOT = os.path.join(BASE_DIR , 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR , 'mediafiles')
+MEDIA_URL = '/media/'
