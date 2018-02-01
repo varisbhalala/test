@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render ,HttpResponseRedirect
 import datetime
 from data.models import Publisher , Advertiser , User
 from .forms import ImageUploadForm
@@ -59,3 +59,19 @@ def store(request):
             m.save()
 
     return render(request,'navigation.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def logout(request):
+    del request.session['username']
+    return HttpResponseRedirect('/navigation/')
+
+def login_check(request):
+    if request.POST:
+        username_session = request.POST.get('username')
+        password_session = request.POST.get('password')
+        record = User.objects.filter(username = username_session, password = password_session)
+        if record:
+            request.session['username'] = username_session
+            return HttpResponseRedirect('/navigation/')

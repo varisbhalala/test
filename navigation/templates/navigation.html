@@ -24,9 +24,18 @@
       <a class="nav-link disabled" href="#">Disabled</a>
     </li>
   </ul>
+
+
   <ul class="navbar-nav float-right">
-      <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> Sign Up</a></li>
-      <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+      {% if request.session.username %}
+      <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> Welcome {{ request.session.username }}</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-in" aria-hidden="true"></i> Log Out</a></li>
+
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user-circle" aria-hidden="true"></i>Sign Up</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a></li>
+        {% endif %}
+
     </ul>
 </nav>
 
