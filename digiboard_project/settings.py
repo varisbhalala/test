@@ -75,8 +75,8 @@ WSGI_APPLICATION = 'digiboard_project.wsgi.application'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'digiboard2030@gmail.com'
+EMAIL_HOST_PASSWORD = 'digiboard'
 EMAIL_USE_TLS = True
 
 
@@ -122,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 

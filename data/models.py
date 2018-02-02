@@ -21,7 +21,7 @@ class Advertisement(models.Model):
 class Advertiser(models.Model):
     name = models.TextField()
     contact = models.BigIntegerField(null=True,blank=True)
-    email = models.TextField()
+    email = models.TextField(unique=True)
     avatar = models.ImageField(upload_to = "advertiser" ,default="/Users/varis.bhalala/Desktop/digi_repository/static/img/dummy.jpg")
     company_name = models.TextField()
     company_address = models.TextField()
@@ -72,7 +72,7 @@ class Payment(models.Model):
 class Publisher(models.Model):
     name = models.TextField()
     contact = models.BigIntegerField(null=True,blank=True)
-    email = models.TextField()
+    email = models.TextField(unique=True)
     avatar = models.ImageField(upload_to = "publisher" ,default="/Users/varis.bhalala/Desktop/digi_repository/static/img/dummy.jpg")
     company_name = models.TextField()
     company_address = models.TextField()
@@ -130,6 +130,7 @@ class Slot(models.Model):
 class User(models.Model):
     username = models.CharField(unique=True, max_length=10)
     password = models.TextField()
+    token = models.TextField(default=None,null=True)
     created_at = models.DateTimeField('Created', default=datetime.datetime.now())
     updated_at = models.DateTimeField('Updated', default=datetime.datetime.now())
     role = models.TextField()

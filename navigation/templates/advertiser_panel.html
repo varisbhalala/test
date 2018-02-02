@@ -1,0 +1,10 @@
+{% include 'navigation.html' %}
+<br />
+<br />
+
+<h1>ADVERTISER PANEL</h1>
+{% for entry in record1 %}
+<img src="/media/{{ entry.avatar }}" style="width:20%;height:20%;" alt="publisher image" />
+Welcome {{entry.name}}
+
+{% endfor %}

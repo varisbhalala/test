@@ -1,3 +1,6 @@
+{% include 'navigation.html' %}
+<center>
+
 
 <form method="POST" action="{% url 'store' %}" enctype="multipart/form-data">
   {% csrf_token %}
@@ -26,3 +29,4 @@
 
   <input type="submit" value="Register" />
 </form>
+</center>
