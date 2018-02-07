@@ -1,7 +1,7 @@
 from django.shortcuts import render ,HttpResponseRedirect , HttpResponse
 import datetime
-from data.models import Publisher , Advertiser , User
-
+from data.models import Publisher , Advertiser , User ,Board
+from geopy.geocoders import Nominatim
 from django.core.mail import send_mail , EmailMessage
 from django.utils.crypto import get_random_string
 # Create your views here.
@@ -73,19 +73,25 @@ def login_check(request):
     if request.POST:
         username_session = request.POST.get('username')
         password_session = request.POST.get('password')
-        record = User.objects.get(username = username_session, password = password_session)
-        request.session['username'] = username_session
-        if record.role == 'p':
-            record1 = Publisher.objects.filter(id = record.uid)
-            return render(request,'publisher_panel.html',{'record1':record1})
-        elif record.role == 'a':
-            record1 = Advertiser.objects.filter(id = record.uid)
-            return render(request,'advertiser_panel.html',{'record1':record1})
-        else:
-            return HttpResponseRedirect('/login/')
 
+
+        if User.objects.filter(username = username_session, password = password_session):
+            record = User.objects.get(username = username_session, password = password_session)
+            request.session['username'] = username_session
+            if record.role == 'p':
+                record1 = Publisher.objects.filter(id = record.uid)
+                record2 = Board.objects.filter(Publisher_id = record1[0].id)
+                return render(request,'publisher_panel.html',{'record1':record1 , 'record2':record2})
+            elif record.role == 'a':
+                record1 = Advertiser.objects.filter(id = record.uid)
+                return render(request,'advertiser_panel.html',{'record1':record1})
+            else:
+                return render(request, 'login.html' , {'error_message' : "username or password incorrect"})
+        else:
+            return render(request, 'login.html' , {'error_message' : "username or password incorrect"})
 
 def publisher_panel(request):
+
     return render(request, 'publisher_panel.html')
 
 def advertiser_panel(request):
@@ -137,3 +143,25 @@ def save_password(request):
         return HttpResponseRedirect('/login/')
     else:
         return render(request, 'new_password.html',{'incorrect_email': "new password and confirm password does not match"})
+
+
+def create_board(request):
+    return render(request, 'create_board.html')
+
+
+def save_board(request):
+
+    geolocator = Nominatim()
+    form = Board()
+    record1 = User.objects.get(username = request.session['username'])
+    form.lat = request.POST['lat']
+    form.lng = request.POST['lng']
+    form.street = request.POST['street']
+    form.area = request.POST['area']
+    form.city = request.POST['city']
+    form.state = request.POST['state']
+    form.created_at = datetime.datetime.now()
+    form.updated_at = datetime.datetime.now()
+    form.Publisher_id = record1.uid
+    form.save()
+    return HttpResponseRedirect('/publisher_panel/')

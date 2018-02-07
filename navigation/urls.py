@@ -14,4 +14,6 @@ urlpatterns = [
     path('check_email/', views.check_email, name='check_email'),
     path('new_password/', views.new_password, name='new_password'),
     path('save_password/', views.save_password, name='save_password'),
+    path('create_board/', views.create_board, name='create_board'),
+    path('save_board/', views.save_board , name='save_board'),
 ]

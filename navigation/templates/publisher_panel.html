@@ -1,6 +1,54 @@
 {% include 'navigation.html' %}
 <br />
-<br />
+<br  />
+<html>
+<head>
+  <script type="text/javascript">
+  var map;
+  function initialize() {
+
+  var myLatlng = new google.maps.LatLng(23.02681761,72.50794172);
+
+  var myOptions = {
+     zoom: 13,
+     center: myLatlng,
+     mapTypeId: google.maps.MapTypeId.ROADMAP
+     }
+  map = new google.maps.Map(document.getElementsByClassName("map_canvas"), myOptions);
+
+  var marker = new google.maps.Marker({
+  draggable: true,
+  position: myLatlng,
+  map: map,
+  title: "Your location"
+  });
+
+
+
+
+  }
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6a14x2cSa9aU1AV1QJY84gK9rmApeFsU&callback=initMap">
+  </script>
+  <style type="text/css">
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      width: 40%;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .container {
+      padding: 2px 16px;
+    }
+  </style>
+</head>
+<body>
+
 
 <h1>PUBLISHER PANEL</h1>
 {% for entry in record1 %}
@@ -8,3 +56,27 @@
 Welcome {{entry.name}}
 
 {% endfor %}
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<a href="{% url 'create_board' %}">create_board</a>
+
+{% for e in record2 %}
+  <div class="card" >
+
+
+    <div class="map_canvas" onload="initialize()" style="width:100%; height:50%"></div>
+    <div class="container">
+    street: {{e.street}}<br />
+    area: {{e.area}}<br />
+    city: {{e.city}}<br />
+    state: {{e.state}}
+    </div>
+  </div><br /><br />
+{% endfor %}
+</body>
+</html>

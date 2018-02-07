@@ -21,7 +21,7 @@ class Advertisement(models.Model):
 class Advertiser(models.Model):
     name = models.TextField()
     contact = models.BigIntegerField(null=True,blank=True)
-    email = models.TextField(unique=True)
+    email = models.CharField(unique=True,max_length=100)
     avatar = models.ImageField(upload_to = "advertiser" ,default="/Users/varis.bhalala/Desktop/digi_repository/static/img/dummy.jpg")
     company_name = models.TextField()
     company_address = models.TextField()
@@ -40,10 +40,9 @@ class Board(models.Model):
     area = models.TextField()
     city = models.TextField()
     state = models.TextField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    publisher = models.ForeignKey('Publisher', models.DO_NOTHING, db_column='Publisher_id')  # Field name made lowercase.
-
+    created_at = models.DateTimeField('Created', default=datetime.datetime.now())
+    updated_at = models.DateTimeField('Updated', default=datetime.datetime.now())
+    Publisher_id = models.IntegerField()
 
 
 
@@ -72,7 +71,7 @@ class Payment(models.Model):
 class Publisher(models.Model):
     name = models.TextField()
     contact = models.BigIntegerField(null=True,blank=True)
-    email = models.TextField(unique=True)
+    email = models.CharField(unique=True,max_length=100)
     avatar = models.ImageField(upload_to = "publisher" ,default="/Users/varis.bhalala/Desktop/digi_repository/static/img/dummy.jpg")
     company_name = models.TextField()
     company_address = models.TextField()

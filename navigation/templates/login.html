@@ -1,6 +1,9 @@
 
-{% include 'navigation.html' %}
-
+{% include 'navigation.html' %}<br />
+<br /><br />
+{% if error_message %}
+username or password incorrect
+{% endif %}
 <form method="POST" action="{% url 'login_check' %}" enctype="multipart/form-data">
   {% csrf_token %}
   <input type="text" name="username" />
